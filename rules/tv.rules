@@ -1,0 +1,32 @@
+// this assumes you also have the wake on lan binding configured.
+rule "Power on TV via Wake on LAN"
+when
+Item LG_TV0_Power received command ON
+then
+    LG_TV0_WOL.sendCommand(ON)
+end
+
+// for relative volume changes
+rule "VolumeUpDown"
+when Item LG_TV0_VolDummy received command
+then
+    switch receivedCommand{
+        case 0: LG_TV0_Volume.sendCommand(DECREASE)
+        case 1: LG_TV0_Volume.sendCommand(INCREASE)
+    }
+end
+
+// for relative channel changes
+rule "ChannelUpDown"
+when Item LG_TV0_ChannelDummy received command
+then
+    val actions = getActions("lgwebos","lgwebos:WebOSTV:7de97491-850c-de0c-9ba4-b30d9e52ecfe")
+    if(null === actions) {
+        logInfo("actions", "Actions not found, check thing ID")
+        return
+    }
+    switch receivedCommand{
+                    case 0: actions.decreaseChannel()
+                    case 1: actions.increaseChannel()
+    }
+end

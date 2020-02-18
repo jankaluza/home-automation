@@ -1,0 +1,7 @@
+// for relative volume changes
+rule "OutsideTempChanged"
+when Time cron "0 0/15 * 1/1 * ? *"
+then
+    LG_TV0_Toast.sendCommand(String::format("Venkovni teplota [%s °C]", temp_outside.state.toString))
+end
+

@@ -1,0 +1,11 @@
+Switch LG_TV0_Power "TV Power" <television>  { autoupdate="false", channel="lgwebos:WebOSTV:7de97491-850c-de0c-9ba4-b30d9e52ecfe:power" }
+Switch LG_TV0_Mute  "TV Mute"                { channel="lgwebos:WebOSTV:7de97491-850c-de0c-9ba4-b30d9e52ecfe:mute"}
+Dimmer LG_TV0_Volume "Volume [%S]"           { channel="lgwebos:WebOSTV:7de97491-850c-de0c-9ba4-b30d9e52ecfe:volume" }
+Number LG_TV0_VolDummy "VolumeUpDown"
+String LG_TV0_Channel "Channel [%d]"         { channel="lgwebos:WebOSTV:7de97491-850c-de0c-9ba4-b30d9e52ecfe:channel" }
+Number LG_TV0_ChannelDummy "ChannelUpDown"
+String LG_TV0_ChannelName "Channel [%S]"     { channel="lgwebos:WebOSTV:7de97491-850c-de0c-9ba4-b30d9e52ecfe:channelName"}
+String LG_TV0_Toast                          { channel="lgwebos:WebOSTV:7de97491-850c-de0c-9ba4-b30d9e52ecfe:toast"}
+Switch LG_TV0_Stop "Stop"                    { autoupdate="false", channel="lgwebos:WebOSTV:7de97491-850c-de0c-9ba4-b30d9e52ecfe:mediaStop" }
+String LG_TV0_Application "Application [%s]" { channel="lgwebos:WebOSTV:7de97491-850c-de0c-9ba4-b30d9e52ecfe:appLauncher"}
+Player LG_TV0_Player                         { channel="lgwebos:WebOSTV:7de97491-850c-de0c-9ba4-b30d9e52ecfe:mediaPlayer"}

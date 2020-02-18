@@ -1,0 +1,21 @@
+sitemap default label="Domov"
+{
+    Frame label="Zaluzie" {
+        Default item=Shutter_All
+        Group item=GF label="Prizemi"
+        Group item=FF label="Patro"
+    }
+
+    Frame label="Radio" {
+        Selection item=Radio_station label="Stanice" mappings=[0=Vypnuto, 1=Radiozurnal, 2=Dvojka]
+        Slider item=Volume label="Hlasitost" icon="soundvolume"
+    }
+
+    Frame label="Teplota" {
+        Default item=temp_outside
+        Default item=temp_hot_water
+        Default item=temp_cold_water
+        Chart item=temp_outside period=d refresh=300
+        Chart item=temp_outside period=W refresh=300
+    }
+}

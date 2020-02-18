@@ -1,0 +1,13 @@
+rule "shutters up on sun rise"
+when
+    Channel 'astro:sun:home:rise#event' triggered START
+then
+    Shutter_All.sendCommand(UP)
+end
+
+rule "shutters down on sun set"
+when
+    Channel 'astro:sun:home:set#event' triggered START
+then
+    Shutter_All.sendCommand(DOWN)
+end
