@@ -1,0 +1,1 @@
+Contact Front_door_contact "Front door contact"         <contact>  {channel="mqtt:topic:MyMQTTBroker:front_door_contact:state"}
