@@ -8,7 +8,6 @@ sitemap default label="Domov"
 
     Frame label="Radio" {
         Selection item=Radio_station label="Stanice" mappings=[0=Vypnuto, 1=Radiozurnal, 2=Dvojka]
-        Slider item=Volume label="Hlasitost" icon="soundvolume"
     }
 
     Frame label="Teplota" {
@@ -17,5 +16,10 @@ sitemap default label="Domov"
         Default item=temp_cold_water
         Chart item=temp_outside period=d refresh=300
         Chart item=temp_outside period=W refresh=300
+    }
+
+    Frame label="Dvere" {
+        Default item=Front_door_contact
+        Chart item=Front_door_contact period=d refresh=300
     }
 }

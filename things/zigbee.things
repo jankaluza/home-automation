@@ -1,6 +1,6 @@
 Bridge mqtt:broker:MyMQTTBroker [ host="localhost", secure=false] {
     Thing topic front_door_contact "Front door contact" {
         Channels:
-            Type contact : state [stateTopic="zigbee2mqtt/front_door_contact/contact", open="false", closed="true"]
+            Type contact : state [stateTopic="zigbee2mqtt/front_door_contact/contact", on="false", off="true"]
     }
 }

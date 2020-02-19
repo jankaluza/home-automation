@@ -30,3 +30,9 @@ then
                     case 1: actions.increaseChannel()
     }
 end
+
+rule "turnoff radio"
+when Item LG_TV0_Application changed to "com.webos.app.livetv"
+then
+    playStream(null)
+end
