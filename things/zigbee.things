@@ -3,4 +3,10 @@ Bridge mqtt:broker:MyMQTTBroker [ host="localhost", secure=false] {
         Channels:
             Type contact : state [stateTopic="zigbee2mqtt/front_door_contact/contact", on="false", off="true"]
     }
+
+    Thing topic back_door_contact "Back door contact" {
+        Channels:
+            Type contact : state [stateTopic="zigbee2mqtt/back_door_contact/contact", on="false", off="true"]
+    }
+
 }

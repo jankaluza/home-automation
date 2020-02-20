@@ -6,6 +6,8 @@ then
         case 0 : playStream(null)
         case 1 : playStream("https://api.play.cz/radio/cro1-128.mp3.m3u")
         case 2 : playStream("https://api.play.cz/radio/cro2-128.mp3.m3u")
+        case 3 : playStream("https://api.play.cz/radio/croplus128.mp3.m3u")
+        case 4 : playStream("https://api.play.cz/radio/crojuniormaxi128.mp3.m3u")
     }
 
     if (receivedCommand != 0) {

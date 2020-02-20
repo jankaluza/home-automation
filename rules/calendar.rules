@@ -1,0 +1,15 @@
+rule "get calendar events"
+when
+   Item say_calendar changed to ON
+then
+   calendar_api_run.sendCommand(ON)
+end
+
+
+rule "say calendar events"
+when
+   Item calendar_api_run changed from ON to OFF
+then
+   say_calendar.sendCommand(OFF)
+end
+

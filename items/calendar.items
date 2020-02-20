@@ -1,0 +1,3 @@
+Switch calendar_api_run {channel="exec:command:calendar_api:run", autoupdate="false"}
+String calendar_api_output {channel="exec:command:calendar_api:output"}
+Switch say_calendar

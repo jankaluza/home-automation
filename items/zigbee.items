@@ -1,1 +1,4 @@
-Contact Front_door_contact "Hlavni vchod"         <contact>  {channel="mqtt:topic:MyMQTTBroker:front_door_contact:state"}
+Group contacts           "Contacts"     <contacts>    ["Contacts"]
+
+Contact Front_door_contact "Hlavni vchod"         (contacts)  {channel="mqtt:topic:MyMQTTBroker:front_door_contact:state"}
+Contact Back_door_contact "Zadni vchod"         (contacts)  {channel="mqtt:topic:MyMQTTBroker:back_door_contact:state"}

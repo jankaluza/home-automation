@@ -7,19 +7,22 @@ sitemap default label="Domov"
     }
 
     Frame label="Radio" {
-        Selection item=Radio_station label="Stanice" mappings=[0=Vypnuto, 1=Radiozurnal, 2=Dvojka]
+        Selection item=Radio_station label="Stanice" mappings=[0=Vypnuto, 1=Radiozurnal, 2=Dvojka, 3=Plus, 4=Junior]
     }
 
     Frame label="Teplota" {
         Default item=temp_outside
         Default item=temp_hot_water
         Default item=temp_cold_water
-        Chart item=temp_outside period=d refresh=300
-        Chart item=temp_outside period=W refresh=300
+        Chart item=temp_outside period=d refresh=60000
+        Chart item=temp_outside period=W refresh=60000
     }
 
     Frame label="Dvere" {
         Default item=Front_door_contact
-        Chart item=Front_door_contact period=d refresh=300
+        Default item=Back_door_contact
+        Chart item=contacts period=d refresh=60000
+        Default item=say_calendar
     }
+
 }
