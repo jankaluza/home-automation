@@ -1,2 +1,1 @@
-Number Radio_station "Stanice"
-Dimmer Volume                   "Hlasitost [%.1f %%]"
+Number        RadioStation         "Stanice"

@@ -1,4 +1,6 @@
-DateTime         Sunrise_Time       "Sunrise [%1$tH:%1$tM]"                   { channel="astro:sun:home:rise#start" }
-DateTime         Sunset_Time        "Sunset [%1$tH:%1$tM]"                    { channel="astro:sun:home:set#start" }
-Number:Angle     Azimuth            "Azimuth"                                 { channel="astro:sun:home:position#azimuth" }
-Number:Angle     Elevation          "Elevation"                               { channel="astro:sun:home:position#elevation" }
+DateTime         SunriseBlindsTime      "Sunrise Blinds [%1$tH:%1$tM]"            { channel="astro:sun:home_blinds_control:rise#start" }
+DateTime         SunsetBlindsTime       "Sunset Blinds [%1$tH:%1$tM]"             { channel="astro:sun:home_blinds_control:set#start" }
+DateTime         SunriseTime            "Sunrise [%1$tH:%1$tM]"                   { channel="astro:sun:home:rise#start" }
+DateTime         SunsetTime             "Sunset [%1$tH:%1$tM]"                    { channel="astro:sun:home:rise#start" }
+Number:Angle     SunAzimuth             "Sun Azimuth"                             { channel="astro:sun:home:position#azimuth" }
+Number:Angle     SunElevation           "Sun Elevation"                           { channel="astro:sun:home:position#elevation" }

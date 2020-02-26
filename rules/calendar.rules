@@ -1,15 +1,24 @@
-rule "get calendar events"
+rule "Execute calendar-api command to get the list of events."
 when
-   Item say_calendar changed to ON
+   Item SayCalendar changed to ON
 then
-   calendar_api_run.sendCommand(ON)
+   CalendarApiRun.sendCommand(ON)
 end
 
 
-rule "say calendar events"
+rule "Say the events once calendar-api returns data."
 when
-   Item calendar_api_run changed from ON to OFF
+   Item CalendarApiRun changed from ON to OFF
 then
-   say_calendar.sendCommand(OFF)
+   logInfo("calendar.rules", CalendarApiOutput.state.toString)
+   say(CalendarApiOutput.state.toString)
+   SayCalendar.sendCommand(OFF)
 end
 
+
+rule "Say calendar events when Toaster starts toasting :)."
+when
+   Item Toaster changed to ON
+then
+   SayCalendar.sendCommand(ON)
+end

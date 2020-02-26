@@ -1,0 +1,11 @@
+var Timer timer = null
+
+rule "Set default values after init."
+when
+    System started
+then
+    timer = createTimer(now.plusSeconds(60)) [|
+        AutoBlindsEnabled.postUpdate(ON)
+        timer = null
+    ]
+end

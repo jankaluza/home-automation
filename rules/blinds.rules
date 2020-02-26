@@ -1,0 +1,50 @@
+rule "Automatic GF blinds up on Sunrise, but not before 7:00."
+when
+    Channel 'astro:sun:home_blinds_control:rise#event' triggered START
+then
+    if (AutoBlindsEnabled.state == ON && BlindsGFAll.state != 0) {
+        BlindsGFAll.sendCommand(UP)
+    }
+end
+
+
+rule "Automatic all blinds down on Sunset + 20 minutes."
+when
+    Channel 'astro:sun:home_blinds_control:set#event' triggered START
+then
+    if (AutoBlindsEnabled.state == ON) {
+        BlindsGFAll.sendCommand(DOWN)
+        BlindsFFAll.sendCommand(DOWN)
+    }
+end
+
+
+rule "On sunrise, move GF blinds up if breakfast started."
+when
+    Channel 'astro:sun:home:rise#event' triggered START
+then
+    if (AutoBlindsEnabled.state == ON && Breakfast.state == ON && BlindsGFAll.state != 0) {
+        BlindsGFAll.sendCommand(UP)
+    }
+end
+
+
+rule "On breakfast start, move GF blinds up if sunrise already started."
+when
+    Item Breakfast changed to ON
+then
+    val sunrise = new DateTime(SunriseTime.state.toString)
+    if (AutoBlindsEnabled.state == ON && now.isAfter(sunrise) && BlindsGFAll.state != 0) {
+        BlindsGFAll.sendCommand(UP)
+    }
+end
+
+
+rule "Everyday on 8:00, move the blinds in FF up."
+when
+    Time cron "0 0 8 1/1 * ? *"
+then
+    if (AutoBlindsEnabled.state == ON) {
+        BlindsFFAll.sendCommand(UP)
+    }
+end

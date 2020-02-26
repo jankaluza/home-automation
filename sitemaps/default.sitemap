@@ -1,13 +1,14 @@
 sitemap default label="Domov"
 {
     Frame label="Zaluzie" {
-        Default item=Shutter_All
-        Group item=GF label="Prizemi"
-        Group item=FF label="Patro"
+        Default item=AutoBlindsEnabled
+        Default item=BlindsAll
+        Group item=BlindsGF label="Prizemi"
+        Group item=BlindsFF label="Patro"
     }
 
     Frame label="Radio" {
-        Selection item=Radio_station label="Stanice" mappings=[0=Vypnuto, 1=Radiozurnal, 2=Dvojka, 3=Plus, 4=Junior]
+        Selection item=RadioStation label="Stanice" mappings=[0=Vypnuto, 1=Radiozurnal, 2=Dvojka, 3=Plus, 4=Junior]
     }
 
     Frame label="Teplota" {
@@ -21,8 +22,9 @@ sitemap default label="Domov"
     Frame label="Dvere" {
         Default item=Front_door_contact
         Default item=Back_door_contact
+        Chart item=contacts period=4h refresh=60000
         Chart item=contacts period=d refresh=60000
-        Default item=say_calendar
+        Default item=SayCalendar
     }
 
 }

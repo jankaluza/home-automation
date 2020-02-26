@@ -1,6 +1,6 @@
 rule "Select Radio Station"
 when
-    Item Radio_station received command
+    Item RadioStation received command
 then
     switch(receivedCommand) {
         case 0 : playStream(null)

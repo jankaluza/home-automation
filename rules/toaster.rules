@@ -1,0 +1,28 @@
+rule "toaster on/off"
+when
+   Item Plug_toaster_power changed
+then
+   if (Plug_toaster_power.state > 100) {
+      if (Toaster.state != ON) {
+          Toaster.sendCommand(ON)
+      }
+   }
+   else {
+      if (Toaster.state != OFF) {
+          Toaster.sendCommand(OFF)
+      }
+   }
+end
+
+
+rule "toaster on"
+when
+   Item Toaster changed to ON
+then
+   if (now.getHourOfDay() >= 5 && now.getHourOfDay() <= 8) {
+      if (Breakfast != ON) {
+         Breakfast.sendCommand(ON)
+      }
+   }
+end
+
