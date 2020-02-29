@@ -8,7 +8,7 @@ end
 
 rule "Say the events once calendar-api returns data."
 when
-   Item CalendarApiRun changed from ON to OFF
+   Item CalendarApiOutput received update
 then
    logInfo("calendar.rules", CalendarApiOutput.state.toString)
    say(CalendarApiOutput.state.toString)
