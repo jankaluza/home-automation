@@ -2,6 +2,8 @@ Group contacts           "Contacts"     <contacts>    ["Contacts"]
 
 Contact Front_door_contact "Hlavni vchod"         (contacts)  {channel="mqtt:topic:MyMQTTBroker:front_door_contact:state"}
 Contact Back_door_contact "Zadni vchod"         (contacts)  {channel="mqtt:topic:MyMQTTBroker:back_door_contact:state"}
+Contact Garage_door_contact "Garazova vrata"         (contacts)  {channel="mqtt:topic:MyMQTTBroker:garage_door_contact:state"}
+
 
 Switch Plug_1_state        "Zasuvka 1 [%s]"             <poweroutlet> ["Switchable"] { channel="mqtt:topic:MyMQTTBroker:plug_1:state" }
 Switch Plug_toaster_state        "Zasuvka 1 [%s]"             <poweroutlet> ["Switchable"] { channel="mqtt:topic:MyMQTTBroker:plug_toaster:state" }

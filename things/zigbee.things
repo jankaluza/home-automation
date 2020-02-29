@@ -9,6 +9,12 @@ Bridge mqtt:broker:MyMQTTBroker [ host="localhost", secure=false] {
             Type contact : state [stateTopic="zigbee2mqtt/back_door_contact/contact", on="false", off="true"]
     }
 
+    Thing topic garage_door_contact "Garage door contact" {
+        Channels:
+            Type contact : state [stateTopic="zigbee2mqtt/garage_door_contact/contact", on="false", off="true"]
+    }
+
+
     Thing topic plug_1 "Plug 1" {
         Channels:
             Type switch : state [stateTopic="zigbee2mqtt/plug_1", commandTopic="zigbee2mqtt/plug_1/set", on="ON", off="OFF"]

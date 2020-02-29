@@ -12,19 +12,19 @@ sitemap default label="Domov"
     }
 
     Frame label="Teplota" {
-        Default item=temp_outside
-        Default item=temp_hot_water
-        Default item=temp_cold_water
-        Chart item=temp_outside period=d refresh=60000
-        Chart item=temp_outside period=W refresh=60000
+        Default item=TemperatureOutside
+        Default item=TemperatureHotWater
+        Default item=TemperatureColdWater
+        Chart item=TemperatureOutside period=d refresh=60000
+        Chart item=TemperatureOutside period=W refresh=60000
     }
 
     Frame label="Dvere" {
         Default item=Front_door_contact
         Default item=Back_door_contact
+        Default item=Garage_door_contact
         Chart item=contacts period=4h refresh=60000
         Chart item=contacts period=d refresh=60000
         Default item=SayCalendar
     }
-
 }
