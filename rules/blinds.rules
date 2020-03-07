@@ -48,3 +48,14 @@ then
         BlindsFFAll.sendCommand(UP)
     }
 end
+
+rule "Ground room blinds down if sun is shining."
+when
+    Item WeatherStationSolarRadiation changed
+then
+    if (WeatherStationSolarRadiation.state > 30 && BlindGroundRoom.state != 100) {
+        BlindGroundRoom.sendCommand(DOWN)
+        Thread::sleep(42)
+        sendHttpGetRequest("http://10.0.0.110:8090?blind_name=GROUND_ROOM&cmd=UP_A_BIT")
+    }
+end

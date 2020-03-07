@@ -1,0 +1,31 @@
+sitemap weatherstation label="Meteostanice"
+{
+    Frame label="Teplota" {
+        Default item=TemperatureOutside
+        Default item=WeatherStationOutdoorTemperature
+        Chart item=TemperaturesChart period=d refresh=60000
+        Chart item=TemperaturesChart period=W refresh=60000
+    }
+    Frame label="Vítr" {
+        Default item=WeatherStationWindSpeed
+        Default item=WeatherStationGustSpeed
+        Default item=WeatherStationWindDirection
+        Default item=WeatherStationWindDirectionName
+        Chart item=WeatherStationWindChart period=d refresh=60000
+        Chart item=WeatherStationWindDirection period=d refresh=60000 legend=true
+        Chart item=WeatherStationWindChart period=W refresh=120000
+        Chart item=WeatherStationWindDirection period=W refresh=60000 legend=true
+    }
+    Frame label="Vlhkost" {
+        Chart item=WeatherStationChart1 period=d refresh=120000
+        Chart item=WeatherStationChart1 period=W refresh=120000
+    }
+    Frame label="Sluneční svit" {
+        Chart item=WeatherStationSolarRadiation period=d refresh=120000 legend=true
+        Chart item=WeatherStationSolarRadiation period=W refresh=120000 legend=true
+    }
+    Frame label="Srážky" {
+        Chart item=WeatherStationHourlyRainRate period=d refresh=120000 legend=true
+        Chart item=WeatherStationHourlyRainRate period=W refresh=120000 legend=true
+    }
+}

@@ -11,12 +11,13 @@ sitemap default label="Domov"
         Selection item=RadioStation label="Stanice" mappings=[0=Vypnuto, 1=Radiozurnal, 2=Dvojka, 3=Plus, 4=Junior]
     }
 
-    Frame label="Teplota" {
+    Frame label="Meteostanice" {
+        Group item=WeatherStation
         Default item=TemperatureOutside
-        Default item=TemperatureHotWater
-        Default item=TemperatureColdWater
-        Chart item=TemperatureOutside period=d refresh=60000
-        Chart item=TemperatureOutside period=W refresh=60000
+        Chart item=TemperaturesChart period=d refresh=60000
+        Chart item=TemperaturesChart period=W refresh=60000
+        Chart item=WeatherStationChart1 period=d refresh=120000
+        Chart item=WeatherStationChart1 period=W refresh=120000
     }
 
     Frame label="Dvere" {
@@ -25,6 +26,6 @@ sitemap default label="Domov"
         Default item=Garage_door_contact
         Chart item=contacts period=4h refresh=60000
         Chart item=contacts period=d refresh=60000
-        Default item=SayCalendar
+        Chart item=Plug_1_power period=h refresh=60000
     }
 }

@@ -6,6 +6,7 @@ Contact Garage_door_contact "Garazova vrata"         (contacts)  {channel="mqtt:
 
 
 Switch Plug_1_state        "Zasuvka 1 [%s]"             <poweroutlet> ["Switchable"] { channel="mqtt:topic:MyMQTTBroker:plug_1:state" }
-Switch Plug_toaster_state        "Zasuvka 1 [%s]"             <poweroutlet> ["Switchable"] { channel="mqtt:topic:MyMQTTBroker:plug_toaster:state" }
-Number Plug_toaster_power        "Zasuvka 1 prikon"             <poweroutlet> { channel="mqtt:topic:MyMQTTBroker:plug_toaster:power" }
+Number Plug_1_power        "Zasuvka 1 [%s] prikon"             <poweroutlet> { channel="mqtt:topic:MyMQTTBroker:plug_1:power" }
+Switch Plug_toaster_state        "Zasuvka toustovac [%s]"             <poweroutlet> ["Switchable"] { channel="mqtt:topic:MyMQTTBroker:plug_toaster:state" }
+Number Plug_toaster_power        "Zasuvka toustovac prikon"             <poweroutlet> { channel="mqtt:topic:MyMQTTBroker:plug_toaster:power" }
 Switch Toaster             "Toaster [%s]"

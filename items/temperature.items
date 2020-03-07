@@ -1,5 +1,0 @@
-Group         Temperatures           "Teploty"     <teploty>    ["Teploty"]
-
-Number        TemperatureOutside        "Venkovni teplota [%.1f °C]"  (Temperatures) { http="<[http://10.0.0.110:8090?blind_name=OUTSIDE&cmd=TEMP:60000:REGEX(.*(.*?).*)]" }
-Number        TemperatureHotWater       "Topna voda [%.1f °C]"        (Temperatures) { http="<[http://10.0.0.110:8090?blind_name=HOT_WATER&cmd=TEMP:60000:REGEX(.*(.*?).*)]" }
-Number        TemperatureColdWater      "Vratna voda [%.1f °C]"       (Temperatures) { http="<[http://10.0.0.110:8090?blind_name=COLD_WATER&cmd=TEMP:60000:REGEX(.*(.*?).*)]" }
