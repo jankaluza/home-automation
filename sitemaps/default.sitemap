@@ -2,9 +2,12 @@ sitemap default label="Domov"
 {
     Frame label="Zaluzie" {
         Default item=AutoBlindsEnabled
-        Default item=BlindsAll
-        Group item=BlindsGF label="Prizemi"
-        Group item=BlindsFF label="Patro"
+        Switch item=Blinds
+        Switch item=BlindsGF
+        Switch item=BlindsFF
+        Default item=Blinds
+        Default item=BlindsGF
+        Default item=BlindsFF
     }
 
     Frame label="Radio" {
@@ -26,6 +29,6 @@ sitemap default label="Domov"
         Default item=Garage_door_contact
         Chart item=contacts period=4h refresh=60000
         Chart item=contacts period=d refresh=60000
-        Chart item=Plug_1_power period=h refresh=60000
+        Chart item=Plug_1_power period=4h refresh=60000
     }
 }

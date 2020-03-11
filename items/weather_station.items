@@ -4,24 +4,26 @@ Group WeatherStationChart2
 Group WeatherStationWindChart
 Group         Temperatures           "Teploty"     <teploty>    ["Teploty"]
 Group TemperaturesChart
+Group WeatherStationPressure
 
-Number        TemperatureOutside        "Venkovní teplota [%.1f °C]"  (Temperatures, TemperaturesChart) { http="<[http://10.0.0.110:8090?blind_name=OUTSIDE&cmd=TEMP:60000:REGEX((.*))]" }
-Number        TemperatureHotWater       "Topna voda [%.1f °C]"        (Temperatures) { http="<[http://10.0.0.110:8090?blind_name=HOT_WATER&cmd=TEMP:60000:REGEX((.*))]" }
-Number        TemperatureColdWater      "Vratna voda [%.1f °C]"       (Temperatures) { http="<[http://10.0.0.110:8090?blind_name=COLD_WATER&cmd=TEMP:60000:REGEX((.*))]" }
+Number        TemperatureOutside        "Venkovní teplota [%.1f °C]" <temperature>  (Temperatures, TemperaturesChart) { http="<[http://10.0.0.110:8090?blind_name=OUTSIDE&cmd=TEMP:60000:REGEX((.*))]" }
+Number        TemperatureHotWater       "Topna voda [%.1f °C]"       <temperature> (Temperatures) { http="<[http://10.0.0.110:8090?blind_name=HOT_WATER&cmd=TEMP:60000:REGEX((.*))]" }
+Number        TemperatureColdWater      "Vratna voda [%.1f °C]"      <temperature> (Temperatures) { http="<[http://10.0.0.110:8090?blind_name=COLD_WATER&cmd=TEMP:60000:REGEX((.*))]" }
 
 
 
-Number WeatherStationIndoorTemperature     "Vnitřní teplota [%.1f °C]" (WeatherStation, TemperaturesChart)   {http="<[http://10.0.0.133/livedata.htm:60000:REGEX(.*inTemp.....................................................................value=.(.*?)..m.*)]"}
-Number WeatherStationIndoorHumidity        "Vnitřní vlhkost [%.1f]"  (WeatherStation, WeatherStationChart1)  {http="<[http://10.0.0.133/livedata.htm:60000:REGEX(.*inHumi.....................................................................value=.(.*?)..m.*)]"}
-Number WeatherStationAbsolutePressure      "Absolutní tlak [%.1f]"  {http="<[http://10.0.0.133/livedata.htm:60000:REGEX(.*AbsPress.....................................................................value=.(.*?)..m.*)]"}
-Number WeatherStationRelativePressure      "Relativní tlak [%.1f]"  {http="<[http://10.0.0.133/livedata.htm:60000:REGEX(.*RelPress.....................................................................value=.(.*?)..m.*)]"}
-Number WeatherStationOutdoorTemperature    "Venkovní teplota (střecha) [%.1f °C]" (TemperaturesChart)   {http="<[http://10.0.0.133/livedata.htm:60000:REGEX(.*outTemp.....................................................................value=.(.*?)..m.*)]"}
-Number WeatherStationOutdoorHumidity       "Venkovní vlhkost [%.1f]" (WeatherStation, WeatherStationChart1)  {http="<[http://10.0.0.133/livedata.htm:60000:REGEX(.*outHumi.....................................................................value=.(.*?)..m.*)]"}
-Number WeatherStationWindDirection         "Směr větru [%.1f °]" (WeatherStation)      {http="<[http://10.0.0.133/livedata.htm:60000:REGEX(.*windir.....................................................................value=.(.*?)..m.*)]"}
+Number WeatherStationIndoorTemperature     "Vnitřní teplota [%.1f °C]" <temperature> (WeatherStation, TemperaturesChart)   {http="<[weatherCache:15000:REGEX(.*inTemp.....................................................................value=.(.*?)..m.*)]"}
+Number WeatherStationIndoorHumidity        "Vnitřní vlhkost [%.1f %%]" <humidity> (WeatherStation, WeatherStationChart1)  {http="<[weatherCache:15000:REGEX(.*inHumi.....................................................................value=.(.*?)..m.*)]"}
+Number WeatherStationAbsolutePressure      "Absolutní tlak [%.1f hpa]" <pressure> (WeatherStationPressure) {http="<[weatherCache:15000:REGEX(.*AbsPress.....................................................................value=.(.*?)..m.*)]"}
+Number WeatherStationRelativePressure      "Relativní tlak [%.1f hpa]" <pressure> (WeatherStationPressure) {http="<[weatherCache:15000:REGEX(.*RelPress.....................................................................value=.(.*?)..m.*)]"}
+Number WeatherStationOutdoorTemperature    "Venkovní teplota (střecha) [%.1f °C]" <temperature> (TemperaturesChart)   {http="<[weatherCache:15000:REGEX(.*outTemp.....................................................................value=.(.*?)..m.*)]"}
+Number WeatherStationOutdoorHumidity       "Venkovní vlhkost [%.1f %%]" <humidity> (WeatherStation, WeatherStationChart1)  {http="<[weatherCache:15000:REGEX(.*outHumi.....................................................................value=.(.*?)..m.*)]"}
+Number WeatherStationWindDirection         "Směr větru [%.1f °]" <wind> (WeatherStation)      {http="<[weatherCache:15000:REGEX(.*windir.....................................................................value=.(.*?)..m.*)]"}
 String WeatherStationWindDirectionName     "Směr větru [%s]" <windrose> (WeatherStation)
-Number WeatherStationWindSpeed             "Rychlost větru [%.1f km/h]"  (WeatherStation, WeatherStationWindChart)   {http="<[http://10.0.0.133/livedata.htm:60000:REGEX(.*windspeed.....................................................................value=.(.*?)..m.*)]"}
-Number WeatherStationGustSpeed             "Rychlost větru v nárazech [%.1f km/h]"  (WeatherStation, WeatherStationWindChart)  {http="<[http://10.0.0.133/livedata.htm:60000:REGEX(.*gustspeed.....................................................................value=.(.*?)..m.*)]"}
-Number WeatherStationSolarRadiation        "Sluneční svit [%.1f]"  (WeatherStation)    {http="<[http://10.0.0.133/livedata.htm:60000:REGEX(.*solarrad.....................................................................value=.(.*?)..m.*)]"}
-Number WeatherStationUV                    "UV"       (WeatherStation)          {http="<[http://10.0.0.133/livedata.htm:60000:REGEX(.*uv.....................................................................value=.(.*?)..m.*)]"}
-Number WeatherStationHourlyRainRate        "Srážky za hodinu [%.1f mm/h]" (WeatherStation)  {http="<[http://10.0.0.133/livedata.htm:60000:REGEX(.*rainofhourly.....................................................................value=.(.*?)..m.*)]"}
-
+Number WeatherStationWindSpeed             "Rychlost větru [%.1f km/h]" <wind>  (WeatherStation, WeatherStationWindChart)   {http="<[weatherCache:15000:REGEX(.*windspeed.....................................................................value=.(.*?)..m.*)]"}
+Number WeatherStationGustSpeed             "Rychlost větru v nárazech [%.1f km/h]" <wind> (WeatherStation, WeatherStationWindChart)  {http="<[weatherCache:15000:REGEX(.*gustspeed.....................................................................value=.(.*?)..m.*)]"}
+Number WeatherStationSolarRadiation        "Sluneční svit [%.1f W/m2]"  <sun_clouds> (WeatherStation)   {http="<[weatherCache:15000:REGEX(.*solarrad.....................................................................value=.(.*?)..m.*)]"}
+Number WeatherStationUV                    "UV"       (WeatherStation)          {http="<[weatherCache:15000:REGEX(.*uv.....................................................................value=.(.*?)..m.*)]"}
+Number WeatherStationHourlyRainRate        "Srážky za hodinu [%.1f mm/h]" <rain> (WeatherStation)  {http="<[weatherCache:15000:REGEX(.*rainofhourly.....................................................................value=.(.*?)..m.*)]"}
+Number WeatherStationDailyRainRate         "Srážky za den [%.1f mm/h]" <rain> (WeatherStation)  {http="<[weatherCache:15000:REGEX(.*rainofdaily..................................................value=.(.*?)..m.*)]"}
+Number WeatherStationWeeklyRainRate        "Srážky za týden [%.1f mm/h]" <rain> (WeatherStation)  {http="<[weatherCache:15000:REGEX(.*rainofweekly.................................................value=.(.*?)..m.*)]"}

@@ -2,8 +2,8 @@ rule "Automatic GF blinds up on Sunrise, but not before 7:00."
 when
     Channel 'astro:sun:home_blinds_control:rise#event' triggered START
 then
-    if (AutoBlindsEnabled.state == ON && BlindsGFAll.state != 0) {
-        BlindsGFAll.sendCommand(UP)
+    if (AutoBlindsEnabled.state == ON && BlindsGF.state != 0) {
+        BlindsGF.sendCommand(UP)
     }
 end
 
@@ -13,8 +13,7 @@ when
     Channel 'astro:sun:home_blinds_control:set#event' triggered START
 then
     if (AutoBlindsEnabled.state == ON) {
-        BlindsGFAll.sendCommand(DOWN)
-        BlindsFFAll.sendCommand(DOWN)
+        Blinds.sendCommand(DOWN)
     }
 end
 
@@ -23,8 +22,8 @@ rule "On sunrise, move GF blinds up if breakfast started."
 when
     Channel 'astro:sun:home:rise#event' triggered START
 then
-    if (AutoBlindsEnabled.state == ON && Breakfast.state == ON && BlindsGFAll.state != 0) {
-        BlindsGFAll.sendCommand(UP)
+    if (AutoBlindsEnabled.state == ON && Breakfast.state == ON && BlindsGF.state != 0) {
+        BlindsGF.sendCommand(UP)
     }
 end
 
@@ -34,8 +33,8 @@ when
     Item Breakfast changed to ON
 then
     val sunrise = new DateTime(SunriseTime.state.toString)
-    if (AutoBlindsEnabled.state == ON && now.isAfter(sunrise) && BlindsGFAll.state != 0) {
-        BlindsGFAll.sendCommand(UP)
+    if (AutoBlindsEnabled.state == ON && now.isAfter(sunrise) && BlindsGF.state != 0) {
+        BlindsGF.sendCommand(UP)
     }
 end
 
@@ -45,7 +44,7 @@ when
     Time cron "0 0 8 1/1 * ? *"
 then
     if (AutoBlindsEnabled.state == ON) {
-        BlindsFFAll.sendCommand(UP)
+        BlindsFF.sendCommand(UP)
     }
 end
 
@@ -53,9 +52,68 @@ rule "Ground room blinds down if sun is shining."
 when
     Item WeatherStationSolarRadiation changed
 then
-    if (WeatherStationSolarRadiation.state > 30 && BlindGroundRoom.state != 100) {
+
+    val maxSolarRadiation = WeatherStationSolarRadiation.maximumSince(now.minusMinutes(20)).state
+    logInfo("blinds.rules", "maxSolarRadiation " + maxSolarRadiation)
+
+    // Handle the cases when Sun cannot shine into windows.
+    if (SunElevation.state < 12) {
+        if (SunAzimuth.state < 160) {
+            // Sun is rising, so do nothing.
+            return
+        }
+        else if (SunAzimuth.state > 235) {
+            // Sun is setting, so move the blinds up.
+            if (BlindGroundRoom.state != 0) {
+                BlindGroundRoom.sendCommand(UP)
+            }
+            return
+        }
+    }
+    else if (SunElevation.state > 40) {
+        // Sun is too high to shine into the windows.
+        if (BlindGroundRoom.state != 0) {
+            BlindGroundRoom.sendCommand(UP)
+        }
+        return
+    }
+    else if (SunAzimuth.state > 235) {
+        // Sun is setting, so move the blinds up.
+        if (BlindGroundRoom.state != 0) {
+            BlindGroundRoom.sendCommand(UP)
+        }
+        return
+    }
+
+
+    if (LG_TV0_Power.state == OFF && BlindLivingRoom.state != 0) {
+	BlindLivingRoom.sendCommand(UP)
+    }
+
+
+    if (maxSolarRadiation < 250) {
+	if (BlindGroundRoom.state != 0) {
+		BlindGroundRoom.sendCommand(UP)
+	}
+	if (BlindLivingRoom.state != 0) {
+		BlindLivingRoom.sendCommand(UP)
+	}
+        return
+    }
+
+
+
+    if (WeatherStationSolarRadiation.state > 250 && BlindGroundRoom.state != 100) {
         BlindGroundRoom.sendCommand(DOWN)
-        Thread::sleep(42)
+        Thread::sleep(42000)
+        sendHttpGetRequest("http://10.0.0.110:8090?blind_name=GROUND_ROOM&cmd=UP_A_BIT")
+        Thread::sleep(1000)
         sendHttpGetRequest("http://10.0.0.110:8090?blind_name=GROUND_ROOM&cmd=UP_A_BIT")
     }
+    if (WeatherStationSolarRadiation.state > 250 && BlindLivingRoom.state != 100 && LG_TV0_Power.state == ON) {
+        BlindLivingRoom.sendCommand(DOWN)
+        Thread::sleep(21000)
+        sendHttpGetRequest("http://10.0.0.110:8090?blind_name=LIVING_ROOM&cmd=UP_A_BIT")
+    }
+
 end

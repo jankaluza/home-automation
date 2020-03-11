@@ -1,10 +1,6 @@
-Group         BlindsGF           "Prizemi"
-Group         BlindsFF           "Patro"
-Group         Blinds             "Vsechny"
-
-Rollershutter BlindsGFAll        "Vsechny"       (BlindsGF)         {http=">[UP:GET:http://10.0.0.110:8090?blind_name=KITCHEN+DINING_ROOM+TERACE_RIGHT+TERACE_LEFT+LIVING_ROOM+GROUND_ROOM&cmd=UP] >[DOWN:GET:http://10.0.0.110:8090?blind_name=KITCHEN+DINING_ROOM+TERACE_RIGHT+TERACE_LEFT+LIVING_ROOM+GROUND_ROOM&cmd=DOWN] >[STOP:GET:http://10.0.0.110:8090?blind_name=KITCHEN+DINING_ROOM+TERACE_RIGHT+TERACE_LEFT+LIVING_ROOM+GROUND_ROOM&cmd=STOP]"}
-Rollershutter BlindsFFAll        "Vsechny"       (BlindsFF)         {http=">[UP:GET:http://10.0.0.110:8090?blind_name=BEDROOM+FLOOR_ROOM_RIGHT+FLOOR_ROOM_LEFT&cmd=UP] >[DOWN:GET:http://10.0.0.110:8090?blind_name=BEDROOM+FLOOR_ROOM_RIGHT+FLOOR_ROOM_LEFT&cmd=DOWN] >[STOP:GET:http://10.0.0.110:8090?blind_name=BEDROOM+FLOOR_ROOM_RIGHT+FLOOR_ROOM_LEFT&cmd=STOP]"}
-Rollershutter BlindsAll          "Vsechny"                          {http=">[UP:GET:http://10.0.0.110:8090?blind_name=KITCHEN+DINING_ROOM+TERACE_RIGHT+TERACE_LEFT+LIVING_ROOM+GROUND_ROOM+BEDROOM+FLOOR_ROOM_RIGHT+FLOOR_ROOM_LEFT&cmd=UP] >[DOWN:GET:http://10.0.0.110:8090?blind_name=KITCHEN+DINING_ROOM+TERACE_RIGHT+TERACE_LEFT+LIVING_ROOM+GROUND_ROOM+BEDROOM+FLOOR_ROOM_RIGHT+FLOOR_ROOM_LEFT&cmd=DOWN] >[STOP:GET:http://10.0.0.110:8090?blind_name=KITCHEN+DINING_ROOM+TERACE_RIGHT+TERACE_LEFT+LIVING_ROOM+GROUND_ROOM+BEDROOM+FLOOR_ROOM_RIGHT+FLOOR_ROOM_LEFT&cmd=STOP]"}
+Group:Rollershutter         BlindsGF           "Přízemí"  <rollershutter>
+Group:Rollershutter         BlindsFF           "Patro"    <rollershutter>
+Group:Rollershutter         Blinds             "Všechny"  <rollershutter>
 
 Rollershutter BlindKitchen       "Kuchyn"        (BlindsGF, Blinds)         {http=">[UP:GET:http://10.0.0.110:8090?blind_name=KITCHEN&cmd=UP] >[DOWN:GET:http://10.0.0.110:8090?blind_name=KITCHEN&cmd=DOWN] >[STOP:GET:http://10.0.0.110:8090?blind_name=KITCHEN&cmd=STOP]"}
 Rollershutter BlindDiningRoom    "Jidelna"       (BlindsGF, Blinds)         {http=">[UP:GET:http://10.0.0.110:8090?blind_name=DINING_ROOM&cmd=UP] >[DOWN:GET:http://10.0.0.110:8090?blind_name=DINING_ROOM&cmd=DOWN] >[STOP:GET:http://10.0.0.110:8090?blind_name=DINING_ROOM&cmd=STOP]"}
