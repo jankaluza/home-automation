@@ -2,3 +2,7 @@ Switch        CalendarApiRun          {channel="exec:command:calendar_api:run", 
 String        CalendarApiOutput       {channel="exec:command:calendar_api:output"}
 Number        CalendarApiExitCode     {channel="exec:command:calendar_api:exit"}
 Switch        SayCalendar
+
+Switch        CalendarApiAlarmRun          {channel="exec:command:calendar_api_alarm:run", autoupdate="false"}
+String        CalendarApiAlarmOutput       {channel="exec:command:calendar_api_alarm:output"}
+Number        CalendarApiAlarmExitCode     {channel="exec:command:calendar_api_alarm:exit"}

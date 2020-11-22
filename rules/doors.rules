@@ -1,0 +1,50 @@
+rule "Say notification if doors are open for long time."
+when
+    Time cron "0 0/1 * 1/1 * ? *"
+then
+    logInfo("doors.rules", "checking doors")
+    var String to_say = "";
+    if (Front_door_contact.state == OPEN) {
+        logInfo("doors.rules", "Front door open")
+        to_say += "Pozor. Vchodové dveře jsou otevřené."
+    }
+    if (Garage_door_contact.state == OPEN) {
+        logInfo("doors.rules", "Garage door open")
+        to_say += "Pozor. Garážová vrata jsou otevřená."
+    }
+    if (Back_door_contact.state == "OPEN") {
+        logInfo("doors.rules", "Back door open")
+        to_say += "Pozor. Zadní dveře jsou otevřené."
+    }
+
+    if (Front_door_contact.state == UNDEF) {
+        logInfo("doors.rules", "Front door undef")
+        to_say += "Pozor. Nelze zjistit stav vchodových dveří."
+    }
+    if (Garage_door_contact.state == UNDEF) {
+        logInfo("doors.rules", "Garage door undef")
+        to_say += "Pozor. Nelze zjistit stav garážových vrat."
+    }
+    if (Back_door_contact.state == "UNDEF") {
+        logInfo("doors.rules", "Back door undef")
+        to_say += "Pozor. Nelze zjistit stav zadních dveří."
+    }
+
+    if (!to_say.isEmpty()) {
+        say(to_say)
+        createTimer(now.plusMinutes(1)) [|
+            var String to_say_timer = "";
+            if (Front_door_contact.state == CLOSED) {
+                to_say_timer += "Vchodové dveře jsou zavřené."
+            }
+            if (Garage_door_contact.state == CLOSED) {
+                to_say_timer += "Garážová vrata jsou zavřená."
+            }
+            if (Back_door_contact.state == CLOSED) {
+                to_say_timer += "Zadní dveře jsou zavřené."
+            }
+            say(to_say_timer)
+        ]
+    }
+
+end

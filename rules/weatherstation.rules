@@ -5,7 +5,7 @@ then
     var Number angle = WeatherStationWindDirection.state
 
     if (angle < 22.5)
-	localCurrentWindDirectionText.postUpdate("S")
+	WeatherStationWindDirectionName.postUpdate("S")
     else if (angle < 22.5 + 45)
 	WeatherStationWindDirectionName.postUpdate("SV")
     else if (angle < 22.5 + 90)
@@ -22,4 +22,21 @@ then
 	WeatherStationWindDirectionName.postUpdate("SZ")
     else
 	WeatherStationWindDirectionName.postUpdate("S")
+end
+
+
+rule "update TemperatureOutsideDayBefore"
+when
+    Item TemperatureOutside changed
+then
+    TemperatureOutsideDayBefore.postUpdate(TemperatureOutside.historicState(now.minusDays(1)).state)
+    TemperatureOutsideHourBefore.postUpdate(TemperatureOutside.historicState(now.minusMinutes(60)).state)
+end
+
+rule "update WeatherStationOutdoorTemperatureDayBefore"
+when
+    Item WeatherStationOutdoorTemperature changed
+then
+    WeatherStationOutdoorTemperatureDayBefore.postUpdate(WeatherStationOutdoorTemperature.historicState(now.minusDays(1)).state)
+    WeatherStationOutdoorTemperatureHourBefore.postUpdate(WeatherStationOutdoorTemperature.historicState(now.minusMinutes(60)).state)
 end

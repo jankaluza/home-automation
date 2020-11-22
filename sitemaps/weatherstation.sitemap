@@ -1,9 +1,15 @@
 sitemap weatherstation label="Meteostanice"
 {
+
     Frame label="Teplota" {
         Default item=TemperatureOutside
         Default item=WeatherStationOutdoorTemperature
-        Chart item=TemperaturesChart period=d refresh=60000
+        Default item=TemperatureOutsideHourBefore
+        Default item=WeatherStationOutdoorTemperatureHourBefore
+        Default item=TemperatureOutsideDayBefore
+        Default item=WeatherStationOutdoorTemperatureDayBefore
+
+        Chart item=TemperaturesChart period=D refresh=60000
         Chart item=TemperaturesChart period=W refresh=60000
     }
 
@@ -12,10 +18,8 @@ sitemap weatherstation label="Meteostanice"
         Default item=WeatherStationGustSpeed
         Default item=WeatherStationWindDirection
         Default item=WeatherStationWindDirectionName
-        Chart item=WeatherStationWindChart period=d refresh=60000
-        Chart item=WeatherStationWindDirection period=d refresh=60000 legend=true
-        Chart item=WeatherStationWindChart period=W refresh=120000
-        Chart item=WeatherStationWindDirection period=W refresh=60000 legend=true
+        Chart item=WeatherStationWindChart period=D refresh=60000
+        Chart item=WeatherStationWindDirection period=D refresh=60000 legend=true
     }
 
     Frame label="Sluneční svit" {
@@ -28,6 +32,8 @@ sitemap weatherstation label="Meteostanice"
         Default item=WeatherStationHourlyRainRate
         Default item=WeatherStationDailyRainRate
         Default item=WeatherStationWeeklyRainRate
+        Default item=WeatherStationMonthlyRainRate
+        Default item=WeatherStationYearlyRainRate
         Chart item=WeatherStationDailyRainRate period=d refresh=120000 legend=true
         Chart item=WeatherStationDailyRainRate period=W refresh=120000 legend=true
     }

@@ -4,22 +4,44 @@ astro:sun:home_blinds_control [ geolocation="49.9280306,18.0328650,233", interva
             earliest="07:00"
         ]
         Type rangeEvent : set#event [
-            offset=20
+            offset=10
         ]
         Type start : rise#start [
             earliest="07:00"
         ]
         Type start : set#start [
-            offset=20
+            offset=10
+        ]
+
+}
+
+astro:sun:home_blinds_control_ff [ geolocation="49.9280306,18.0328650,233", interval=60 ] {
+    Channels:
+        Type rangeEvent : rise#event [
+            earliest="07:00"
+        ]
+        Type rangeEvent : set#event [
+            offset=10,
+            latest="19:00"
+        ]
+        Type start : rise#start [
+            earliest="07:00"
+        ]
+        Type start : set#start [
+            offset=10,
+            latest="19:00"
         ]
 
 }
 
 astro:sun:home [ geolocation="49.9280306,18.0328650,233", interval=60 ] {
         Type rangeEvent : rise#event [
-            offset=10
+            offset=10,
+            earliest="06:25"
         ]
         Type start : rise#start [
-            offset=10
+            offset=10,
+            earliest="06:25"
         ]
 }
+

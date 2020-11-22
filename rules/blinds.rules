@@ -8,7 +8,7 @@ then
 end
 
 
-rule "Automatic all blinds down on Sunset + 20 minutes."
+rule "Automatic all blinds down on Sunset + 10 minutes."
 when
     Channel 'astro:sun:home_blinds_control:set#event' triggered START
 then
@@ -17,6 +17,15 @@ then
     }
 end
 
+//rule "Automatic all blinds down on Sunset + 10 minutes or 19:00."
+//when
+//    Channel 'astro:sun:home_blinds_control_ff:set#event' triggered START
+//then
+//    if (AutoBlindsEnabled.state == ON) {
+//        BlindsFF.sendCommand(DOWN)
+//    }
+//end
+
 
 rule "On sunrise, move GF blinds up if breakfast started."
 when
@@ -24,6 +33,7 @@ when
 then
     if (AutoBlindsEnabled.state == ON && Breakfast.state == ON && BlindsGF.state != 0) {
         BlindsGF.sendCommand(UP)
+        BlindBedroom.sendCommand(UP)
     }
 end
 
@@ -35,6 +45,7 @@ then
     val sunrise = new DateTime(SunriseTime.state.toString)
     if (AutoBlindsEnabled.state == ON && now.isAfter(sunrise) && BlindsGF.state != 0) {
         BlindsGF.sendCommand(UP)
+        BlindBedroom.sendCommand(UP)
     }
 end
 
@@ -52,46 +63,71 @@ rule "Ground room blinds down if sun is shining."
 when
     Item WeatherStationSolarRadiation changed
 then
+    val GUST_SPEED_THRESHOLD_1 = 30
+    val GUST_SPEED_THRESHOLD_2 = 60
+
+    if (WeatherStationGustSpeed.state > GUST_SPEED_THRESHOLD_2) {
+        logInfo("blinds.rules", "Wind gust speed {} over {} threshold, moving blinds UP.", WeatherStationGustSpeed.state, GUST_SPEED_THRESHOLD_2)
+        if (Blinds.state != 0) {
+            Blinds.sendCommand(UP)
+        }
+        return
+    }
+    else if (WeatherStationGustSpeed.state > GUST_SPEED_THRESHOLD_1) {
+        logInfo("blinds.rules", "Wind gust speed {} over {} threshold, moving blinds little UP", WeatherStationGustSpeed.state, GUST_SPEED_THRESHOLD_2)
+//        return
+    }
 
     val maxSolarRadiation = WeatherStationSolarRadiation.maximumSince(now.minusMinutes(20)).state
+    val minSolarRadiation = WeatherStationSolarRadiation.minimumSince(now.minusMinutes(3)).state
     logInfo("blinds.rules", "maxSolarRadiation " + maxSolarRadiation)
+    logInfo("blinds.rules", "minSolarRadiation " + minSolarRadiation)
 
     // Handle the cases when Sun cannot shine into windows.
     if (SunElevation.state < 12) {
         if (SunAzimuth.state < 160) {
             // Sun is rising, so do nothing.
+            logInfo("blinds.rules", "Sun is rising, ignoring")
             return
         }
-        else if (SunAzimuth.state > 235) {
+        else if (SunAzimuth.state > 270) {
             // Sun is setting, so move the blinds up.
+            logInfo("blinds.rules", "Sun is setting, moving blinds up.")
             if (BlindGroundRoom.state != 0) {
                 BlindGroundRoom.sendCommand(UP)
             }
             return
         }
     }
-    else if (SunElevation.state > 40) {
+    else if (SunElevation.state > 50) {
         // Sun is too high to shine into the windows.
+        logInfo("blinds.rules", "Sun is too high, moving blinds up.")
         if (BlindGroundRoom.state != 0) {
             BlindGroundRoom.sendCommand(UP)
         }
         return
     }
-    else if (SunAzimuth.state > 235) {
+    else if (SunAzimuth.state > 270) {
         // Sun is setting, so move the blinds up.
+        logInfo("blinds.rules", "Sun is setting, moving blinds up.")
         if (BlindGroundRoom.state != 0) {
             BlindGroundRoom.sendCommand(UP)
         }
         return
     }
-
+    else if (SunAzimuth.state < 160) {
+        // Sun cannot shine to windows.
+        logInfo("blinds.rules", "Sun is too left, ignoring")
+        return
+    }
 
     if (LG_TV0_Power.state == OFF && BlindLivingRoom.state != 0) {
 	BlindLivingRoom.sendCommand(UP)
     }
 
 
-    if (maxSolarRadiation < 250) {
+    if (maxSolarRadiation < 270) {
+        logInfo("blinds.rules", "Solar radiation below 270, moving blinds up.")
 	if (BlindGroundRoom.state != 0) {
 		BlindGroundRoom.sendCommand(UP)
 	}
@@ -103,17 +139,15 @@ then
 
 
 
-    if (WeatherStationSolarRadiation.state > 250 && BlindGroundRoom.state != 100) {
+    if (WeatherStationSolarRadiation.state > 270 && minSolarRadiation > 260 && BlindGroundRoom.state != 100) {
         BlindGroundRoom.sendCommand(DOWN)
         Thread::sleep(42000)
         sendHttpGetRequest("http://10.0.0.110:8090?blind_name=GROUND_ROOM&cmd=UP_A_BIT")
         Thread::sleep(1000)
         sendHttpGetRequest("http://10.0.0.110:8090?blind_name=GROUND_ROOM&cmd=UP_A_BIT")
     }
-    if (WeatherStationSolarRadiation.state > 250 && BlindLivingRoom.state != 100 && LG_TV0_Power.state == ON) {
-        BlindLivingRoom.sendCommand(DOWN)
-        Thread::sleep(21000)
-        sendHttpGetRequest("http://10.0.0.110:8090?blind_name=LIVING_ROOM&cmd=UP_A_BIT")
+    if (WeatherStationSolarRadiation.state > 270 && minSolarRadiation > 260 && BlindLivingRoom.state != 50 && LG_TV0_Power.state == ON) {
+        BlindLivingRoom.sendCommand(50)
     }
 
 end

@@ -1,1 +1,2 @@
 Thing exec:command:calendar_api [ command="/usr/bin/calendar-api", interval=0, autorun=false ]
+Thing exec:command:calendar_api_alarm [ command="/usr/bin/calendar-api alarm", interval=0, autorun=false ]

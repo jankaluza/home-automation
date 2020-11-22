@@ -2,10 +2,11 @@ var Timer timer = null
 
 rule "Set default values after init."
 when
-    System started
+    System started or Time is noon
 then
     timer = createTimer(now.plusSeconds(60)) [|
         AutoBlindsEnabled.postUpdate(ON)
+        Breakfast.sendCommand(OFF)
         timer = null
     ]
 end
