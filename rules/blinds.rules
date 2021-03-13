@@ -59,12 +59,40 @@ then
     }
 end
 
+//rule "Ground room blinds down if sun is shining."
+//when
+//    Item WeatherStationGustSpeed changed
+//then
+//
+//    val GUST_SPEED_THRESHOLD_2 = 60
+//    val GUST_SPEED_THRESHOLD_1 = 30
+
+//    if (WeatherStationGustSpeed.state > GUST_SPEED_THRESHOLD_2) {
+//        logInfo("blinds.rules", "Wind gust speed {} over {} threshold, moving blinds UP.", WeatherStationGustSpeed.state, GUST_SPEED_THRESHOLD_2)
+//        return
+//    }
+//    else if (WeatherStationGustSpeed.state > GUST_SPEED_THRESHOLD_1) {
+//        logInfo("blinds.rules", "Wind gust speed {} over {} threshold, moving blinds little UP", WeatherStationGustSpeed.state, GUST_SPEED_THRESHOLD_1)
+//        if (Blinds.state == 100) {
+//            Blinds.sendCommand(90)
+//            Blinds.sendCommand(UP)
+//        }
+
+
+//        sendHttpGetRequest("http://10.0.0.110:8090?blind_name=GROUND_ROOM&cmd=UP_A_BIT")
+//        Thread::sleep(6000)
+//        sendHttpGetRequest("http://10.0.0.110:8090?blind_name=GROUND_ROOM&cmd=UP_A_BIT")
+//    }
+//end
+
+
 rule "Ground room blinds down if sun is shining."
 when
     Item WeatherStationSolarRadiation changed
 then
-    val GUST_SPEED_THRESHOLD_1 = 30
+
     val GUST_SPEED_THRESHOLD_2 = 60
+    val GUST_SPEED_THRESHOLD_1 = 30
 
     if (WeatherStationGustSpeed.state > GUST_SPEED_THRESHOLD_2) {
         logInfo("blinds.rules", "Wind gust speed {} over {} threshold, moving blinds UP.", WeatherStationGustSpeed.state, GUST_SPEED_THRESHOLD_2)
@@ -142,9 +170,6 @@ then
     if (WeatherStationSolarRadiation.state > 270 && minSolarRadiation > 260 && BlindGroundRoom.state != 100) {
         BlindGroundRoom.sendCommand(DOWN)
         Thread::sleep(42000)
-        sendHttpGetRequest("http://10.0.0.110:8090?blind_name=GROUND_ROOM&cmd=UP_A_BIT")
-        Thread::sleep(1000)
-        sendHttpGetRequest("http://10.0.0.110:8090?blind_name=GROUND_ROOM&cmd=UP_A_BIT")
     }
     if (WeatherStationSolarRadiation.state > 270 && minSolarRadiation > 260 && BlindLivingRoom.state != 50 && LG_TV0_Power.state == ON) {
         BlindLivingRoom.sendCommand(50)

@@ -22,3 +22,20 @@ when
 then
    SayCalendar.sendCommand(ON)
 end
+
+rule "Say calendar-api if even is sclose"
+when
+    Time cron "0 0/5 * 1/1 * ? *"
+then
+//    CalendarApiAlarmRun.sendCommand(ON)
+end
+
+rule "Say the events once calendar-api alarm returns data."
+when
+   Item CalendarApiAlarmOutput received update
+then
+   logInfo("calendar.rules", "calendar-api alarm finished. Output:")
+   logInfo("calendar.rules", CalendarApiAlarmOutput.state.toString)
+   say(CalendarApiAlarmOutput.state.toString)
+end
+

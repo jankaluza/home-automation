@@ -32,7 +32,7 @@ then
 
     if (!to_say.isEmpty()) {
         say(to_say)
-        createTimer(now.plusMinutes(1)) [|
+        createTimer(now.plusSeconds(30)) [|
             var String to_say_timer = "";
             if (Front_door_contact.state == CLOSED) {
                 to_say_timer += "Vchodové dveře jsou zavřené."
