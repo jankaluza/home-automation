@@ -42,7 +42,7 @@ rule "On breakfast start, move GF blinds up if sunrise already started."
 when
     Item Breakfast changed to ON
 then
-    val sunrise = new DateTime(SunriseTime.state.toString)
+    val sunrise = (SunriseTime.state as DateTimeType).getZonedDateTime()
     if (AutoBlindsEnabled.state == ON && now.isAfter(sunrise) && BlindsGF.state != 0) {
         BlindsGF.sendCommand(UP)
         BlindBedroom.sendCommand(UP)
@@ -118,12 +118,16 @@ then
             logInfo("blinds.rules", "Sun is rising, ignoring")
             return
         }
-        else if (SunAzimuth.state > 270) {
+        else if (SunAzimuth.state > 270 && SunElevation.state > 5) {
             // Sun is setting, so move the blinds up.
             logInfo("blinds.rules", "Sun is setting, moving blinds up.")
             if (BlindGroundRoom.state != 0) {
                 BlindGroundRoom.sendCommand(UP)
             }
+            return
+        }
+        else {
+            logInfo("blinds.rules", "Sun is too right, ignoring")
             return
         }
     }

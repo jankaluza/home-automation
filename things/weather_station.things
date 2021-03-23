@@ -1,0 +1,19 @@
+Thing http:url:weather_station "Weather Station" [baseURL="http://10.0.0.133/livedata.htm", commandMethod="GET", timeout=20000, refresh=180] {
+    Channels:
+        Type number: WeatherStationIndoorTemperature2    "Vnitřní teplota" [stateTransformation="REGEX:.*inTemp.....................................................................value=.(.*?)..m.*"]
+        Type number: WeatherStationIndoorHumidity        "Vnitřní vlhkost [%.1f %%]" [stateTransformation="REGEX:.*inHumi.....................................................................value=.(.*?)..m.*"]
+        Type number: WeatherStationAbsolutePressure      "Absolutní tlak [%.1f hpa]" [stateTransformation="REGEX:.*AbsPress.....................................................................value=.(.*?)..m.*"]
+        Type number: WeatherStationRelativePressure      "Relativní tlak [%.1f hpa]" [stateTransformation="REGEX:.*RelPress.....................................................................value=.(.*?)..m.*"]
+        Type number: WeatherStationOutdoorTemperature    "Venkovní teplota (střecha) [%.1f °C]" [stateTransformation="REGEX:.*outTemp.....................................................................value=.(.*?)..m.*"]
+        Type number: WeatherStationOutdoorHumidity       "Venkovní vlhkost [%.1f %%]" [stateTransformation="REGEX:.*outHumi.....................................................................value=.(.*?)..m.*"]
+        Type number: WeatherStationWindDirection         "Směr větru [%.1f °]" [stateTransformation="REGEX:.*windir.....................................................................value=.(.*?)..m.*"]
+        Type number: WeatherStationWindSpeed             "Rychlost větru [%.1f km/h]" [stateTransformation="REGEX:.*windspeed.....................................................................value=.(.*?)..m.*"]
+        Type number: WeatherStationGustSpeed             "Rychlost větru v nárazech [%.1f km/h]" [stateTransformation="REGEX:.*gustspeed.....................................................................value=.(.*?)..m.*"]
+        Type number: WeatherStationSolarRadiation        "Sluneční svit [%.1f W/m2]" [stateTransformation="REGEX:.*solarrad.....................................................................value=.(.*?)..m.*"]
+        Type number: WeatherStationUV                    "UV"                        [stateTransformation="REGEX:.*uv.....................................................................value=.(.*?)..m.*"]
+        Type number: WeatherStationHourlyRainRate        "Aktuální intezita deště [%.1f mm/h]" [stateTransformation="REGEX:.*rainofhourly.....................................................................value=.(.*?)..m.*"]
+        Type number: WeatherStationDailyRainRate         "Srážky za den [%.1f mm]" [stateTransformation="REGEX:.*rainofdaily..................................................value=.(.*?)..m.*"]
+        Type number: WeatherStationWeeklyRainRate        "Srážky za týden [%.1f mm]" [stateTransformation="REGEX:.*rainofweekly.................................................value=.(.*?)..m.*"]
+        Type number: WeatherStationMonthlyRainRate       "Srážky za měsíc [%.1f mm]" [stateTransformation="REGEX:.*rainofmonthly.................................................value=.(.*?)..m.*"]
+        Type number: WeatherStationYearlyRainRate        "Srážky za rok [%.1f mm]" [stateTransformation="REGEX:.*rainofyearly.................................................value=.(.*?)..m.*"]
+}

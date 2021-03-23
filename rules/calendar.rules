@@ -10,7 +10,7 @@ rule "Say the events once calendar-api returns data."
 when
    Item CalendarApiOutput received update
 then
-   logInfo("calendar.rules", CalendarApiOutput.state.toString)
+   logInfo("calendar.rules foo", CalendarApiOutput.state.toString)
    say(CalendarApiOutput.state.toString)
    SayCalendar.sendCommand(OFF)
 end

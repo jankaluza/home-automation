@@ -2,15 +2,14 @@ Group:Rollershutter         BlindsGF           "Přízemí"  <rollershutter>
 Group:Rollershutter         BlindsFF           "Patro"    <rollershutter>
 Group:Rollershutter         Blinds             "Všechny"  <rollershutter>
 
-Rollershutter BlindKitchen       "Kuchyn"        (BlindsGF, Blinds)         {http=">[UP:GET:http://10.0.0.110:8090?blind_name=KITCHEN&cmd=UP] >[DOWN:GET:http://10.0.0.110:8090?blind_name=KITCHEN&cmd=DOWN] >[STOP:GET:http://10.0.0.110:8090?blind_name=KITCHEN&cmd=STOP]"}
-Rollershutter BlindDiningRoom    "Jidelna"       (BlindsGF, Blinds)         {http=">[UP:GET:http://10.0.0.110:8090?blind_name=DINING_ROOM&cmd=UP] >[DOWN:GET:http://10.0.0.110:8090?blind_name=DINING_ROOM&cmd=DOWN] >[STOP:GET:http://10.0.0.110:8090?blind_name=DINING_ROOM&cmd=STOP]"}
-Rollershutter BlindTeraceRight   "Terasa vpravo" (BlindsGF, Blinds)         {http=">[UP:GET:http://10.0.0.110:8090?blind_name=TERACE_RIGHT&cmd=UP] >[DOWN:GET:http://10.0.0.110:8090?blind_name=TERACE_RIGHT&cmd=DOWN] >[STOP:GET:http://10.0.0.110:8090?blind_name=TERACE_RIGHT&cmd=STOP]"}
-Rollershutter BlindTeraceLeft    "Terasa vlevo"  (BlindsGF, Blinds)         {http=">[UP:GET:http://10.0.0.110:8090?blind_name=TERACE_LEFT&cmd=UP] >[DOWN:GET:http://10.0.0.110:8090?blind_name=TERACE_LEFT&cmd=DOWN] >[STOP:GET:http://10.0.0.110:8090?blind_name=TERACE_LEFT&cmd=STOP]"}
-Rollershutter BlindLivingRoom    "Obyvak"        (BlindsGF, Blinds)         {http=">[UP:GET:http://10.0.0.110:8090?blind_name=LIVING_ROOM&cmd=UP] >[DOWN:GET:http://10.0.0.110:8090?blind_name=LIVING_ROOM&cmd=DOWN] >[STOP:GET:http://10.0.0.110:8090?blind_name=LIVING_ROOM&cmd=STOP]"}
-Rollershutter BlindGroundRoom    "Pracovna"      (BlindsGF, Blinds)         {http=">[UP:GET:http://10.0.0.110:8090?blind_name=GROUND_ROOM&cmd=UP] >[DOWN:GET:http://10.0.0.110:8090?blind_name=GROUND_ROOM&cmd=DOWN] >[STOP:GET:http://10.0.0.110:8090?blind_name=GROUND_ROOM&cmd=STOP] >[*:GET:http://10.0.0.110:8090?blind_name=GROUND_ROOM&cmd=POSITION&position=%2$s]"}
-
-Rollershutter BlindBedroom       "Loznice"       (BlindsFF, Blinds)         {http=">[UP:GET:http://10.0.0.110:8090?blind_name=BEDROOM&cmd=UP] >[DOWN:GET:http://10.0.0.110:8090?blind_name=BEDROOM&cmd=DOWN] >[STOP:GET:http://10.0.0.110:8090?blind_name=BEDROOM&cmd=STOP]"}
-Rollershutter BlindRoomRight     "Pokoj Sarinka" (BlindsFF, Blinds)         {http=">[UP:GET:http://10.0.0.110:8090?blind_name=FLOOR_ROOM_RIGHT&cmd=UP] >[DOWN:GET:http://10.0.0.110:8090?blind_name=FLOOR_ROOM_RIGHT&cmd=DOWN] >[STOP:GET:http://10.0.0.110:8090?blind_name=FLOOR_ROOM_RIGHT&cmd=STOP]"}
-Rollershutter BlindRoomtLeft     "Pokoj Anicka"  (BlindsFF, Blinds)         {http=">[UP:GET:http://10.0.0.110:8090?blind_name=FLOOR_ROOM_LEFT&cmd=UP] >[DOWN:GET:http://10.0.0.110:8090?blind_name=FLOOR_ROOM_LEFT&cmd=DOWN] >[STOP:GET:http://10.0.0.110:8090?blind_name=FLOOR_ROOM_LEFT&cmd=STOP]"}
+Rollershutter BlindKitchen       "Kuchyn"        (BlindsGF, Blinds)         {channel="http:url:blinds:BlindKitchen"}
+Rollershutter BlindDiningRoom    "Jidelna"       (BlindsGF, Blinds)         {channel="http:url:blinds:BlindDiningRoom"}
+Rollershutter BlindTeraceRight   "Terasa vpravo" (BlindsGF, Blinds)         {channel="http:url:blinds:BlindTeraceRight"}
+Rollershutter BlindTeraceLeft    "Terasa vlevo"  (BlindsGF, Blinds)         {channel="http:url:blinds:BlindTeraceLeft"}
+Rollershutter BlindLivingRoom    "Obyvak"        (BlindsGF, Blinds)         {channel="http:url:blinds:BlindLivingRoom"}
+Rollershutter BlindGroundRoom    "Pracovna"      (BlindsGF, Blinds)         {channel="http:url:blinds:BlindGroundRoom"}
+Rollershutter BlindBedroom       "Loznice"       (BlindsFF, Blinds)         {channel="http:url:blinds:BlindBedroom"}
+Rollershutter BlindRoomRight     "Pokoj Sarinka" (BlindsFF, Blinds)         {channel="http:url:blinds:BlindRoomRight"}
+Rollershutter BlindRoomLeft      "Pokoj Anicka"  (BlindsFF, Blinds)         {channel="http:url:blinds:BlindRoomLeft"}
 
 Switch        AutoBlindsEnabled  "Automaticke ovladani zaluzii"

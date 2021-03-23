@@ -1,0 +1,6 @@
+Thing http:url:temperatures "Temperatures" [baseURL="http://10.0.0.110:8090", commandMethod="GET", timeout=20000, refresh=180] {
+    Channels:
+        Type number: TemperatureOutside2 "Venkovní teplota" [ stateExtension="?blind_name=OUTSIDE&cmd=TEMP", mode="READONLY"]
+        Type number: TemperatureHotWater "Tepla voda" [ stateExtension="?blind_name=HOT_WATER&cmd=TEMP", mode="READONLY"]
+        Type number: TemperatureColdWater "Vratna voda" [ stateExtension="?blind_name=COLD_WATER&cmd=TEMP", mode="READONLY"]
+}

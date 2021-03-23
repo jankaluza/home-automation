@@ -1,0 +1,12 @@
+Thing http:url:blinds "Blinds" [baseURL="http://10.0.0.110:8090", commandMethod="GET", timeout=20000] {
+    Channels:
+        Type rollershutter: BlindGroundRoom "Pracovna" [ commandExtension="?blind_name=GROUND_ROOM&cmd=%2$s", mode="WRITEONLY", downValue="DOWN", stopValue="STOP", upValue="UP"]
+        Type rollershutter: BlindKitchen    "Kuchyn"   [ commandExtension="?blind_name=KITCHEN&cmd=%2$s", mode="WRITEONLY", downValue="DOWN", stopValue="STOP", upValue="UP"]
+        Type rollershutter: BlindDiningRoom "Jidelna"  [ commandExtension="?blind_name=DINING_ROOM&cmd=%2$s", mode="WRITEONLY", downValue="DOWN", stopValue="STOP", upValue="UP"]
+        Type rollershutter: BlindTeraceRight "Teresa Vpravo"  [ commandExtension="?blind_name=TERACE_RIGHT&cmd=%2$s", mode="WRITEONLY", downValue="DOWN", stopValue="STOP", upValue="UP"]
+        Type rollershutter: BlindTeraceLeft "Teresa Vlevo"  [ commandExtension="?blind_name=TERACE_LEFT&cmd=%2$s", mode="WRITEONLY", downValue="DOWN", stopValue="STOP", upValue="UP"]
+        Type rollershutter: BlindLivingRoom "Obyvak"  [ commandExtension="?blind_name=LIVING_ROOM&cmd=%2$s", mode="WRITEONLY", downValue="DOWN", stopValue="STOP", upValue="UP"]
+        Type rollershutter: BlindBedroom "Loznice"  [ commandExtension="?blind_name=BEDROOM&cmd=%2$s", mode="WRITEONLY", downValue="DOWN", stopValue="STOP", upValue="UP"]
+        Type rollershutter: BlindRoomRight "Pokoj Sarinka"  [ commandExtension="?blind_name=FLOOR_ROOM_RIGHT&cmd=%2$s", mode="WRITEONLY", downValue="DOWN", stopValue="STOP", upValue="UP"]
+        Type rollershutter: BlindRoomLeft "Pokoj Anicka"  [ commandExtension="?blind_name=FLOOR_ROOM_LEFT&cmd=%2$s", mode="WRITEONLY", downValue="DOWN", stopValue="STOP", upValue="UP"]
+}

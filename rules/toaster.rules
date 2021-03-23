@@ -19,7 +19,7 @@ rule "toaster on"
 when
    Item Toaster changed to ON
 then
-   if (now.getHourOfDay() >= 5 && now.getHourOfDay() <= 8) {
+   if (now.getHour() >= 5 && now.getHour() <= 8) {
       if (Breakfast != ON) {
          Breakfast.sendCommand(ON)
       }
